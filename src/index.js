@@ -84,6 +84,23 @@ module.exports = {
     }) 
     res.end()
     },
+    masVotadas : function(req,res){
+        
+		res.write(`\n\n`)
+		res.write(`➢ Más Votadas.\n\n`)
+		res.write(`➢ Total de películas​:`+masVotadas.cantidad()+`\n\n`)
+		
+		//res.write(`➢ Rating Promedio:`+masVotadas.promedio.toFixed(2)+`\n\n`)
+		//res.write(`\n➢ Listado de peliculas:\n\n`)
+		//votadas.forEach(function(movie){
+		//		res.write(`\n★ ${movie.title.toUpperCase()}\n\n`)
+		//		res.write(`• Rating: ${movie.vote_average}\n`)
+		//		res.write(`• Reseña: ${movie.overview}\n`)
+		//	});
+
+        res.end()
+
+    },
     preguntasFrecuentes : function(req,res){
         res.write(preguntasFrecuentes.titulo1+`\n\n`)
 		res.write(preguntasFrecuentes.titulo2+`${preguntas.faqs.length} \n\n`)
@@ -97,5 +114,6 @@ module.exports = {
         res.end()
 
     }
+
 
 }
