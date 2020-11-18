@@ -1,10 +1,12 @@
 const index = require('./src/index');
 
+
 module.exports=function(req,res){
     switch (req.url) {
 		
         case '/': //
-             index.homePage(req,res)
+             index.homePage(req,res);
+             res.end();
 			 break;
 		
         case '/en-cartelera': //
