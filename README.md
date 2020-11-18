@@ -1,6 +1,8 @@
-# Grupo nro...
+# Grupo nro...  3
 ## Trabajo: Hard Lizard
 ## Integrantes:
-- Fulano
-- Zutano
-- Mengano
+- Emilce
+- Eliana
+- Belen
+- Matias
+- Gimena
