@@ -46,7 +46,7 @@ module.exports = {
         res.write ('︺︺︺︺︺︺︺︺︺︺︺︺')
 
         res.write (`\n\n`)
-        res.write (`Total de salas: ${teatros.total_theaters}`)
+        res.write (`Total de salas: ${theaters.total_theaters}`)
         res.write (`\n\n`)
 
          theaters.theaters.forEach(elemento =>{
