@@ -2,6 +2,8 @@ let homePage = require('./homePage')
 
 let movies = homePage.leerJSON()
 
+let theaters = sucursales.leerJSON()
+
 module.exports = {
     homePage : function(req,res){
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
@@ -37,5 +39,23 @@ module.exports = {
     },
     enCartelera : function(req,res){
 
+    },
+    sucursales : function(req, res){
+        res.write ('︹︹︹︹︹︹︹︹︹︹︹︹ \n')
+        res.write ('    NUESTRAS SALAS\n'    )
+        res.write ('︺︺︺︺︺︺︺︺︺︺︺︺')
+
+        res.write (`\n\n`)
+        res.write (`Total de salas: ${teatros.total_theaters}`)
+        res.write (`\n\n`)
+
+         theaters.theaters.forEach(elemento =>{
+            res.write (`
+            ▸ Nombre de la sala: ${elemento.name} \n
+            ▸ Direccion: ${elemento.address} \n
+            ▸ Descripción: ${elemento.description} \n \n
+            `)
+    }) 
+    res.end()
     }
 }
