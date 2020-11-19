@@ -99,7 +99,7 @@ module.exports = {
     },
     contacto : function(req,res){
         res.write(contacto.titulo1+`\n\n`)
-		res.write(contacto.titulo2+`​\n\nSi deseas contactarnos podés escribirnos al siguiente email: dhmovies@digitalhouse.com o en las redes sociales.\nEnvianos tu consulta, sugerencia o reclamo y será respondido a la brevedad posible.\nRecordá que también podes consultar la sección de Preguntas Frecuentes para obtener\nrespuestas inmediatas a los problemas más comunes.​\n\n`)
+		res.write(contacto.titulo2+ contacto.descripcion)
         res.end()
     }
     
