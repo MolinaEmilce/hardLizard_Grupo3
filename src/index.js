@@ -12,6 +12,7 @@ let masVotadas = require('./masVotadas');
 const { totalPelis } = require('./homePage');
 
 let preguntasFrecuentes = require('./preguntasFrecuentes');
+let preguntas = preguntasFrecuentes.leerJSON()
 
 module.exports = {
     homePage : function(req,res){
@@ -66,9 +67,9 @@ module.exports = {
     res.end()
     },
     preguntasFrecuentes : function(req,res){
-        res.write(preguntasFrecuentes.titulo1+`\n\n`)
-		res.write(preguntasFrecuentes.titulo2+`${preguntas.faqs.length} \n\n`)
-        res.write(preguntasFrecuentes.titulo3+`\n\n`)
+        res.write(preguntasFrecuentes.tituloPrincipal+`\n\n`)
+		res.write(preguntasFrecuentes.subtitulo1+`${preguntas.total_faqs} \n\n`)
+        res.write(preguntasFrecuentes.subtitulo2+`\n\n`)
         
     preguntas.faqs.forEach(question => {
         res.write(`\n ${question.faq_title}

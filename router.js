@@ -26,12 +26,11 @@ module.exports=function(req,res){
 			 break;
 
         case '/preguntas-frecuentes': 
-             index.pregFrecuentes(req,res)		
+             index.preguntasFrecuentes(req,res)		
 			 break;
 		default:
-
-			res.end('404 not found')
-
+               res.end('404 not found')
+               break;
 	}
 
 }
