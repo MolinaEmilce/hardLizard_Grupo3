@@ -9,7 +9,6 @@ let theaters = sucursales.leerJSON()
 let enCartelera = require('./enCartelera');
 
 let masVotadas = require('./masVotadas');
-const { totalPelis } = require('./homePage');
 
 let preguntasFrecuentes = require('./preguntasFrecuentes');
 
