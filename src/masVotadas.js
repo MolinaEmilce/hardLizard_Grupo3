@@ -19,7 +19,7 @@ module.exports = {
     ordenado : function(){
         let ordenadosPeliculas = this.masVotadas();
         ordenadosPeliculas.sort(function(a,b){
-			return((a.title<b.title)?-1:((a.title>b.title)?1:0));
+			return((a.vote_average<b.vote_average)? 1:((a.vote_average>b.vote_average)?-1:0));
         });
         return ordenadosPeliculas;
     },
