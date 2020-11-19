@@ -83,5 +83,19 @@ module.exports = {
             `)
     }) 
     res.end()
+    },
+    preguntasFrecuentes : function(req,res){
+        res.write(preguntasFrecuentes.titulo1+`\n\n`)
+		res.write(preguntasFrecuentes.titulo2+`${preguntas.faqs.length} \n\n`)
+        res.write(preguntasFrecuentes.titulo3+`\n\n`)
+        
+    preguntas.faqs.forEach(question => {
+        res.write(`\n ${question.faq_title}
+      \n• ${question.faq_answer}\n\n`)
+        });
+
+        res.end()
+
     }
+
 }
