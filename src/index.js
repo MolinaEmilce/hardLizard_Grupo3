@@ -12,6 +12,8 @@ let masVotadas = require('./masVotadas');
 
 let preguntasFrecuentes = require('./preguntasFrecuentes');
 
+let contacto = require('./contacto')
+
 module.exports = {
     homePage : function(req,res){
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
@@ -106,7 +108,13 @@ module.exports = {
 			});
         res.end()
 
+    },
+    contacto : function(req,res){
+        res.write(contacto.titulo1+`\n\n`)
+		res.write(contacto.titulo2+`​\n\nSi deseas contactarnos podés escribirnos al siguiente email: dhmovies@digitalhouse.com o en las redes sociales.\nEnvianos tu consulta, sugerencia o reclamo y será respondido a la brevedad posible.\nRecordá que también podes consultar la sección de Preguntas Frecuentes para obtener\nrespuestas inmediatas a los problemas más comunes.​\n\n`)
+        res.end()
     }
+    
 
 
 }
