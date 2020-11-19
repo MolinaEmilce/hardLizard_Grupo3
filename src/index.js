@@ -13,25 +13,20 @@ let enCartelera = require('./enCartelera');
 module.exports = {
     homePage : function(req,res){
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
-        res.write('Bienvenidos a DH Movies el mejor sitio para encontrar las mejores películas, incluso mucho mejor que Netflix, Cuevana y PopCorn.\n');
+        res.write(homePage.titulo+`\n`)         
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n\n\n');
                                 //Esto lo agrego para que tenga una mejor vista
-        res.write(`Total de películas en cartelera: ${movies.movies.length} \n`.toUpperCase());
+        res.write(`Total de películas en cartelera: ${movies.movies.length} \n`.toUpperCase());        
         res.write('***********************************\n\n\n');
         //Esto lo agrego para que tenga una mejor vista
-        
-        let pelisOrdenadas = []
-        movies.movies.forEach(movie => {
-        pelisOrdenadas.push (movie.title);
-        
-        });
 
-        pelisOrdenadas.sort();     //el método .sort() ordena alfabeticamente la variable pelisOrdenadas
-        pelisOrdenadas.forEach(pelis => {
-            res.write(pelis);
-            res.write('\n');
-        });
+        res.write(`\n➢ Listado de peliculas:\n\n`)
+
+        let titilosOrdenados = homePage.listarPelis() 
         
+        titilosOrdenados.forEach(movie => {
+            res.write(`\n★ ${movie}\n\n`)
+        })        
 
         res.write('\n\n\n');
         res.write('****************************************\n');        //Esto lo agrego para que tenga una mejor vista
