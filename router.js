@@ -26,7 +26,7 @@ module.exports=function(req,res){
 			 break;
 
         case '/preguntas-frecuentes': 
-             index.preguntasFrecuentes(req,res)			
+             index.pregFrecuentes(req,res)		
 			 break;
 		default:
 

@@ -10,6 +10,8 @@ let enCartelera = require('./enCartelera');
 
 let masVotadas = require('./masVotadas');
 
+let preguntasFrecuentes = require('./preguntasFrecuentes');
+
 module.exports = {
     homePage : function(req,res){
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
@@ -40,24 +42,16 @@ module.exports = {
     },
     enCartelera : function(req,res){
         let cartelera = enCartelera.leerJson(); //trae el metodo del archivo requerido de arriba
-      
-        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n');
-        res.write('                 Cartelera                     \n');  //titulo
-        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n\n\n');
-
-        res.write(`           Total de películas: ${cartelera.total_movies}
+        res.write(enCartelera.tituloPrincipal);
         
-        
-        `);//total de peliculas
+        res.write(enCartelera.totalPeliculas()+'\n\n');//total de peliculas
 
-        let ordenado = cartelera.movies.sort((a,b)=>{
-            return a.title < b.title ? -1 : ((a.title > b.title )  ? 1 : 0) ;
-        });
-        ordenado.forEach(element => {
-            res.write('\n-------------------------------------------------------------------------');
+        
+        enCartelera.ordenCartelera().forEach(element => {
+            res.write('\n                  ------------------------------------------------');
             res.write(`\n\n ${element.title.toUpperCase()}\n\n ${element.overview}`);
 
-        });//recorro lo guardado en la variable ordenado extrayendo lo neceario
+        });//recorro del metodo ordenCartelera  extrayendo lo neceario a mostrar
 
         res.end();
     },
@@ -79,19 +73,23 @@ module.exports = {
     }) 
     res.end()
     },
-    preguntasFrecuentes : function(req,res){
-        res.write(preguntasFrecuentes.titulo1+`\n\n`)
-		res.write(preguntasFrecuentes.titulo2+`${preguntas.faqs.length} \n\n`)
-        res.write(preguntasFrecuentes.titulo3+`\n\n`)
-        
-    preguntas.faqs.forEach(question => {
-        res.write(`\n ${question.faq_title}
-      \n• ${question.faq_answer}\n\n`)
-        });
+    pregFrecuentes : function(req,res){
+
+        res.write(preguntasFrecuentes.tituloPrincipal+'\n\n');
+		res.write(preguntasFrecuentes.subtitulo1 +  preguntasFrecuentes.totalPreguntas()+ '\n\n');
+        res.write(preguntasFrecuentes.subtitulo2 + '\n\n');
+
+        let preguntas = preguntasFrecuentes.leerJSON().faqs;
+
+        preguntas.forEach(function(cadaPregunta){
+            res.write('\n\n\n')
+            res.write(`${cadaPregunta.faq_title.toUpperCase()}\n\n ${cadaPregunta.faq_answer}`);
+        })
 
         res.end()
 
-    },masVotadas : function(req,res){
+    },
+    masVotadas : function(req,res){
         
 		res.write(`\n\n`)
 		res.write(`➢ Más Votadas.\n\n`)
