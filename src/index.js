@@ -102,7 +102,7 @@ module.exports = {
 		res.write(`\n➢ Listado de peliculas:\n\n`)
         let peliculasFinales = masVotadas.ordenado();
         peliculasFinales.forEach(function(pelicula){
-				res.write(`\n★ ${pelicula.title.toUpperCase()}\n\n`)
+				res.write(`\n★ ${pelicula.title}\n\n`)
 				res.write(`• Rating: ${pelicula.vote_average}\n`)
 				res.write(`• Reseña: ${pelicula.overview}\n`)
 			});
