@@ -6,6 +6,10 @@ let sucursales = require ('./sucursales')
 
 let theaters = sucursales.leerJSON()
 
+let enCartelera = require('./enCartelera');
+
+
+
 module.exports = {
     homePage : function(req,res){
         res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
@@ -40,7 +44,27 @@ module.exports = {
         res.end()
     },
     enCartelera : function(req,res){
+        let cartelera = enCartelera.leerJson(); //trae el metodo del archivo requerido de arriba
+      
+        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n');
+        res.write('                 Cartelera                     \n');  //titulo
+        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n\n\n');
 
+        res.write(`           Total de películas: ${cartelera.total_movies}
+        
+        
+        `);//total de peliculas
+
+        let ordenado = cartelera.movies.sort((a,b)=>{
+            return a.title < b.title ? -1 : ((a.title > b.title )  ? 1 : 0) ;
+        });
+        ordenado.forEach(element => {
+            res.write('\n-------------------------------------------------------------------------');
+            res.write(`\n\n ${element.title.toUpperCase()}\n\n ${element.overview}`);
+
+        });//recorro lo guardado en la variable ordenado extrayendo lo neceario
+
+        res.end();
     },
     sucursales : function(req, res){
         res.write ('︹︹︹︹︹︹︹︹︹︹︹︹ \n')

@@ -10,7 +10,7 @@ module.exports=function(req,res){
 			 break;
 		
         case '/en-cartelera': //
-             index.enCartelera(req,res)
+             index.enCartelera(req,res);
 			 break;
 
         case '/mas-votadas': //
