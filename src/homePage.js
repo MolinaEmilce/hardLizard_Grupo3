@@ -4,7 +4,20 @@ const fs = require('fs')
 module.exports = {
     bd : './data/movies.json',
 
-    titulo: "                             Bienvenidos a DH Movies el mejor sitio para encontrar las mejores películas, incluso mucho mejor que Netflix, Cuevana y PopCorn​.",
+    titulo: '                   -----------------------------------------------------------------------------------------------------------------------------------\n'  +                  
+    '                    Bienvenidos a DH Movies el mejor sitio para encontrar las mejores películas, incluso mucho mejor que Netflix, Cuevana y PopCorn​.\n' +   '                   -----------------------------------------------------------------------------------------------------------------------------------\n\n\n ',
+
+    totalPelis : '*************************************\n' + ' Total de películas en cartelera: ',
+
+    secciones: '\n\n\n' + 
+    '****************************************\n'  +     
+    'Recordá que podés visitar las secciones: ' + '\n' + 
+    '֎ En Cartelera' + '\n' +                    
+    '֎ Más Votadas' + '\n' + 
+    '֎ Sucursales' + '\n' +
+    '֎ Contacto' + '\n' +
+    '֎ Preguntas Frecuentes',
+
 
     leerJSON : function() {
         
@@ -13,8 +26,8 @@ module.exports = {
     },
     
     listarPelis: function(){
-        let movies=this.leerJSON()
-        let ordenado = []
+        let movies = this.leerJSON();
+        let ordenado = [];
         
         movies.movies.forEach(function(movie){
 			    ordenado.push(movie.title)
