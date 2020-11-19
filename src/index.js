@@ -8,7 +8,7 @@ let theaters = sucursales.leerJSON()
 
 let enCartelera = require('./enCartelera');
 
-
+let masVotadas = require('./masVotadas');
 
 module.exports = {
     homePage : function(req,res){
@@ -96,6 +96,24 @@ module.exports = {
 
         res.end()
 
+    },masVotadas : function(req,res){
+        
+		res.write(`\n\n`)
+		res.write(`➢ Más Votadas.\n\n`)
+		res.write(`➢ Total de películas​: ${masVotadas.cantidad()}`);
+		
+        res.write(`\n\n➢ Rating Promedio:`+ masVotadas.promedio() +`\n\n`);
+        
+		res.write(`\n➢ Listado de peliculas:\n\n`)
+        let peliculasFinales = masVotadas.ordenado();
+        peliculasFinales.forEach(function(pelicula){
+				res.write(`\n★ ${pelicula.title.toUpperCase()}\n\n`)
+				res.write(`• Rating: ${pelicula.vote_average}\n`)
+				res.write(`• Reseña: ${pelicula.overview}\n`)
+			});
+        res.end()
+
     }
+
 
 }
