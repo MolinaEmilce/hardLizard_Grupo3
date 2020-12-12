@@ -8,47 +8,36 @@ let theaters = sucursales.leerJSON()
 
 let enCartelera = require('./enCartelera');
 
+let masVotadas = require('./masVotadas');
 
+let preguntasFrecuentes = require('./preguntasFrecuentes');
+let preguntas = preguntasFrecuentes.leerJSON()
+
+let contacto = require('./contacto')
 
 module.exports = {
     homePage : function(req,res){
-        res.write('---------------------------------------------------------------------------------------------------------------------------------\n');                    //Esto lo agrego para que tenga una mejor vista
-        res.write(homePage.titulo+`\n`)         
-        res.write('---------------------------------------------------------------------------------------------------------------------------------\n\n\n');
-                                //Esto lo agrego para que tenga una mejor vista
-        res.write(`Total de películas en cartelera: ${movies.movies.length} \n`.toUpperCase());        
-        res.write('***********************************\n\n\n');
-        //Esto lo agrego para que tenga una mejor vista
-
-        res.write(`\n➢ Listado de peliculas:\n\n`)
+        res.write(homePage.titulo);
+                             
+        res.write((`${homePage.totalPelis} ${movies.movies.length}`).toLocaleUpperCase());
+        
+        res.write(`\n\n\n\n➢ Listado de peliculas:\n\n`);
 
         let titilosOrdenados = homePage.listarPelis() 
         
         titilosOrdenados.forEach(movie => {
-            res.write(`\n★ ${movie}\n\n`)
+            res.write(`\n★ ${movie}`)
         })        
 
-        res.write('\n\n\n');
-        res.write('****************************************\n');        //Esto lo agrego para que tenga una mejor vista
-        res.write('Recordá que podés visitar las secciones: ' + '\n' + 
-        '֎ En Cartelera' + '\n' +                    //el signo extraño es un Unicode lo agregue para una mejor vista
-        '֎ Más Votadas' + '\n' + 
-        '֎ Sucursales' + '\n' +
-        '֎ Contacto' + '\n' +
-        '֎ Preguntas Frecuentes');
+        res.write(homePage.secciones);
         res.end()
     },
     enCartelera : function(req,res){
         let cartelera = enCartelera.leerJson(); //trae el metodo del archivo requerido de arriba
       
-        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n');
-        res.write('                 Cartelera                     \n');  //titulo
-        res.write('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\n\n\n');
+        res.write(enCartelera.titulo);
 
-        res.write(`           Total de películas: ${cartelera.total_movies}
-        
-        
-        `);//total de peliculas
+        res.write(`           Total de películas: ${cartelera.total_movies}`);//total de peliculas
 
         let ordenado = cartelera.movies.sort((a,b)=>{
             return a.title < b.title ? -1 : ((a.title > b.title )  ? 1 : 0) ;
@@ -62,9 +51,8 @@ module.exports = {
         res.end();
     },
     sucursales : function(req, res){
-        res.write ('︹︹︹︹︹︹︹︹︹︹︹︹ \n')
-        res.write ('    NUESTRAS SALAS\n'    )
-        res.write ('︺︺︺︺︺︺︺︺︺︺︺︺')
+        
+        res.write(sucursales.titulo);
 
         res.write (`\n\n`)
         res.write (`Total de salas: ${theaters.total_theaters}`)
@@ -97,9 +85,9 @@ module.exports = {
 
     },
     preguntasFrecuentes : function(req,res){
-        res.write(preguntasFrecuentes.titulo1+`\n\n`)
-		res.write(preguntasFrecuentes.titulo2+`${preguntas.faqs.length} \n\n`)
-        res.write(preguntasFrecuentes.titulo3+`\n\n`)
+        res.write(preguntasFrecuentes.tituloPrincipal+`\n\n`)
+		res.write(preguntasFrecuentes.subtitulo1+`${preguntas.total_faqs} \n\n`)
+        res.write(preguntasFrecuentes.subtitulo2+`\n\n`)
         
     preguntas.faqs.forEach(question => {
         res.write(`\n ${question.faq_title}
@@ -108,7 +96,31 @@ module.exports = {
 
         res.end()
 
+    },masVotadas : function(req,res){
+        
+		res.write(`\n\n`)
+		res.write(` Más Votadas.\n\n`.toUpperCase());
+		res.write(`➢ Total de películas​: ${masVotadas.cantidad()}`);
+		
+        res.write(`\n\n➢ Rating Promedio:`+ masVotadas.promedio() +`\n\n`);
+        
+		res.write(`\n➢ Listado de peliculas:\n\n`)
+        let peliculasFinales = masVotadas.ordenado();
+        peliculasFinales.forEach(function(pelicula){
+				res.write(`\n★ ${pelicula.title}\n\n`)
+				res.write(`• Rating: ${pelicula.vote_average}\n`)
+				res.write(`• Reseña: ${pelicula.overview}\n`)
+			});
+        res.end()
+
+    },
+    contacto : function(req,res){
+        res.write(contacto.titulo1+`\n\n`)
+		res.write(contacto.titulo2+ contacto.descripcion)
+        res.end()
     }
+    
+
 
 
 }
